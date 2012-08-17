@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>River Crossing</title>
+        <link rel="stylesheet" type="text/css" href="src/main/css/RiverCrossing.css"/>
+        <script type="text/javascript" src="lib/jsont.js"></script>
+        <script type="text/javascript" src="src/main/js/EntityAbstract.js"></script>
+        <script type="text/javascript" src="src/main/js/EntityChicken.js"></script>
+        <script type="text/javascript" src="src/main/js/Location.js"></script>
+        <script type="text/javascript" src="src/main/js/RiverCrossingConstants.js"></script>
+        <script type="text/javascript" src="src/main/js/RiverCrossingRules.js"></script>
+        <script type="text/javascript" src="src/main/js/RiverCrossingState.js"></script>
+
+        <script type="text/javascript">
+            var constants = new RiverCrossingConstants();
+            var doit = function() {
+                var input = new RiverCrossingState();
+                var rules = new RiverCrossingRules();
+                var output = jsonT(input, rules);
+                var content = document.getElementById("content");
+                var text = document.getElementById("text");
+                text.value = output;
+                content.innerHTML = output;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="content">
+                Waiting for you to click...
+        </div>
+        <br/>
+        <textarea id="text" rows="20" cols="80"></textarea>
+        <br/>
+        <input type="button" onclick="doit();" value="CLick Me!"/>
+        <!--
+        <div style="
+            width: 800px;
+            height:600px;
+            background-color: #8888ff;
+            position: absolute;
+            margin: 0px auto;
+        ">
+            <div style="width: 100%;
+                    height: 40%;
+                    position: absolute;
+                    top: 60%;
+                    left: 0%;
+                    background-color: green;
+            ">
+
+            </div>
+            <div style="width: 5%;
+                    height: 10%;
+                    position: absolute;
+                    top: 50%;
+                    left: 5%;
+                    background-color: red;
+                ">
+
+            </div>
+            <div style="width: 5%;
+                    height: 10%;
+                    position: absolute;
+                    top: 50%;
+                    left: 15%;
+                    background-color: red;
+                ">
+
+            </div>
+        </div>
+        -->
+    </body>
+</html>

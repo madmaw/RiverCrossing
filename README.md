@@ -1,4 +1,4 @@
 RiverCrossing
 =============
 
-River Crossing Ludum Dare Warmup
+Warmup for LD48/24 
