@@ -6,7 +6,8 @@ function RiverCrossingState() {
     this.leftBank = new Location(constants.bankLeft);
     this.rightBank = new Location(constants.bankRight);
     this.boat = new Location(constants.boat);
-    this.boatBank = constants.bankLeft;
+    this.boat.bank = constants.bankLeft;
+    this.boat.justMoved = false;
     this.leftBank.entities.push(chicken1);
     this.leftBank.entities.push(chicken2);
 
@@ -21,6 +22,9 @@ function RiverCrossingState() {
 }
 
 RiverCrossingState.prototype.moveEntityToLocation = function(entityId, locationId) {
+
+    // TODO check it is allowed
+
     var result = false;
     // remove from location
     var movedEntity = null;
@@ -52,3 +56,16 @@ RiverCrossingState.prototype.moveEntityToLocation = function(entityId, locationI
     return result;
 }
 
+RiverCrossingState.prototype.moveBoatToOtherSide = function() {
+    // TODO record what just happened
+    if( this.boat.bank == constants.bankLeft ) {
+        this.boat.bank = constants.bankRight;
+    } else {
+        this.boat.bank = constants.bankLeft;
+    }
+    this.boat.justMoved = true;
+}
+
+RiverCrossingState.prototype.resetActions = function() {
+    this.boat.justMoved = false;
+}

@@ -22,36 +22,51 @@
 .slot {
     width:15%;
     height:100%;
-    float: left;
     background-color: red;
+    vertical-align: bottom;
+    align:center;
 }
 
 .river-sky {
     width:70%;
     height:100%;
-    float: left;
-    display: table-cell;
-    background-color: white;
     vertical-align: bottom;
-    position:relative;
+}
+
+
+.boat-right {
+    margin-left:80%;
+}
+
+.boat-left {
+    margin-left:0%;
 }
 
 .boat-right-to-left {
-    -moz-animation-duration: 10s;
-    -webkit-animation-duration: 10s;
-    -moz-animation-name: slidein;
-    -webkit-animation-name: slidein;
+    -moz-animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    -moz-animation-name: right-to-left-slidein;
+    -webkit-animation-name: right-to-left-slidein;
+    margin-left:0%;
 }
 
+.boat-left-to-right {
+    -moz-animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    -moz-animation-name: left-to-right-slidein;
+    -webkit-animation-name: left-to-right-slidein;
+    margin-left:80%;
+}
+
+
 #boat {
-    position:absolute;
-    top:100%;
-    margin-top:-30px;
-    background-color: pink;
+    background-color: brown;
+    width:20%;
+    height:20%;
 }
 
 .entity {
-    float:left;
+    float: left;
 }
 
 #ground {
@@ -64,28 +79,47 @@
     height:70%;
 }
 
+.bank {
+    background-color: green;
+}
+
 #bank-left-ground {
     width:15%;
     height:100px;
-    background-color: green;
-    float: left;
 }
 
 #bank-right-ground {
     width:15%;
     height:100px;
-    background-color: yellow;
-    float: left;
 }
 
 #river {
     width:70%;
     height:100px;
     background-color: blue;
-    float: left;
 }
 
-@-moz-keyframes slidein {
+@-moz-keyframes left-to-right-slidein {
+      from {
+        margin-left:0%;
+      }
+
+      to {
+        margin-left:80%;
+      }
+    }
+
+@-webkit-keyframes left-to-right-slidein {
+      from {
+        margin-left:0%;
+      }
+
+      to {
+        margin-left:80%;
+      }
+    }
+
+@-moz-keyframes right-to-left-slidein {
       from {
         margin-left:80%;
       }
@@ -95,7 +129,7 @@
       }
     }
 
-@-webkit-keyframes slidein {
+@-webkit-keyframes right-to-left-slidein {
       from {
         margin-left:80%;
       }

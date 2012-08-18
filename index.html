@@ -32,6 +32,7 @@
                     var draggableEntity = riverCrossingState.draggableEntities[i];
                     var element = document.getElementById(draggableEntity.id);
                     element.addEventListener("dragstart", entityHandleDragStart, false);
+                    element.addEventListener("dragend", entityHandleDragEnd, false);
                 }
 
                 for( var i in riverCrossingState.targetLocations ) {
@@ -42,12 +43,23 @@
                     element.addEventListener("dragenter", locationHandleDragEnter, false);
                     element.addEventListener("dragleave", locationHandleDragLeave, false);
                 }
+
+                var boatElement = document.getElementById(constants.boat);
+                boatElement.onclick = function() {
+                    riverCrossingState.resetActions();
+                    riverCrossingState.moveBoatToOtherSide();
+                    doit();
+                }
             }
 
             var entityHandleDragStart = function(e) {
                 this.style.opacity = 0.5;
                 e.dataTransfer.effectAllowed = 'move';
                 e.dataTransfer.setData("text/plain", this.id);
+            }
+
+            var entityHandleDragEnd = function(e) {
+                this.style.opacity = 1;
             }
 
             var locationHandleDragOver = function(e) {
@@ -73,6 +85,7 @@
                 var sourceEntityId = e.dataTransfer.getData("text/plain");
                 var targetLocationId = this.id;
                 if( sourceEntityId != null && targetLocationId != null ) {
+                    riverCrossingState.resetActions();
                     if( riverCrossingState.moveEntityToLocation(sourceEntityId, targetLocationId) ) {
                         doit();
                     }
