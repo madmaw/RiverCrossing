@@ -4,6 +4,7 @@ function RiverCrossingConstants() {
     this.entityTypeCorn     = "corn";
     this.entityTypeFarmer   = "farmer";
 
-    this.bankLeft = "left";
-    this.bankRight = "right";
+    this.bankLeft = "bank-left";
+    this.bankRight = "bank-right";
+    this.boat = "boat";
 }

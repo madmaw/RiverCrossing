@@ -1,11 +1,4 @@
-function Location(maxEntities) {
-    this.maxEntities = maxEntities;
+function Location(id) {
+    this.id = id;
     this.entities = [];
-    for( var i=0; i<maxEntities; i++ ) {
-        this.entities[i] = null;
-    }
-}
-
-Location.prototype.setEntity = function(position, entity) {
-    this.entities[position] = entity;
 }

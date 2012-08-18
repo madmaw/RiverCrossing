@@ -1,9 +1,9 @@
-EntityChicken.prototype = new EntityAbstract(null);
+EntityChicken.prototype = new EntityAbstract(null, null);
 
-function EntityChicken(type) {
+function EntityChicken(id, type) {
     if( type == null ) {
         type = constants.entityTypeChicken;
     }
-    EntityAbstract.apply(this, [type]);
+    EntityAbstract.apply(this, [id, type]);
 }
 

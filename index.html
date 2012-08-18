@@ -7,19 +7,76 @@
         <script type="text/javascript" src="src/main/js/EntityChicken.js"></script>
         <script type="text/javascript" src="src/main/js/Location.js"></script>
         <script type="text/javascript" src="src/main/js/RiverCrossingConstants.js"></script>
-        <script type="text/javascript" src="src/main/js/RiverCrossingRules.js"></script>
+        <!--
+        <script type="text/javascript" src="src/main/js/RiverCrossingDragAndDropFactory.js"></script>
+        -->
         <script type="text/javascript" src="src/main/js/RiverCrossingState.js"></script>
+        <script type="text/javascript" src="src/main/js/rules/RulesRiverCrossing.js"></script>
+        <script type="text/javascript" src="src/main/js/rules/RulesLocation.js"></script>
+        <script type="text/javascript" src="src/main/js/rules/RulesChicken.js"></script>
 
         <script type="text/javascript">
             var constants = new RiverCrossingConstants();
+            var riverCrossingState = new RiverCrossingState();
+            var rules = new RulesRiverCrossing(constants);
+
             var doit = function() {
-                var input = new RiverCrossingState();
-                var rules = new RiverCrossingRules();
-                var output = jsonT(input, rules);
+                var output = jsonT(riverCrossingState, rules);
                 var content = document.getElementById("content");
                 var text = document.getElementById("text");
                 text.value = output;
                 content.innerHTML = output;
+
+                // attach drag handlers
+                for( var i in riverCrossingState.draggableEntities ) {
+                    var draggableEntity = riverCrossingState.draggableEntities[i];
+                    var element = document.getElementById(draggableEntity.id);
+                    element.addEventListener("dragstart", entityHandleDragStart, false);
+                }
+
+                for( var i in riverCrossingState.targetLocations ) {
+                    var targetLocation = riverCrossingState.targetLocations[i];
+                    var element = document.getElementById(targetLocation.id);
+                    element.addEventListener("drop", locationHandleDrop, false);
+                    element.addEventListener("dragover", locationHandleDragOver, false);
+                    element.addEventListener("dragenter", locationHandleDragEnter, false);
+                    element.addEventListener("dragleave", locationHandleDragLeave, false);
+                }
+            }
+
+            var entityHandleDragStart = function(e) {
+                this.style.opacity = 0.5;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData("text/plain", this.id);
+            }
+
+            var locationHandleDragOver = function(e) {
+                if (e.preventDefault) {
+                    e.preventDefault(); // Necessary. Allows us to drop.
+                }
+
+                e.dataTransfer.dropEffect = 'move';
+
+                return false;
+            }
+
+            var locationHandleDragLeave = function(e) {
+                this.classList.remove("over");
+            }
+
+            var locationHandleDragEnter = function(e) {
+                this.classList.add("over");
+            }
+
+            var locationHandleDrop = function(e) {
+                // remove the entity from the
+                var sourceEntityId = e.dataTransfer.getData("text/plain");
+                var targetLocationId = this.id;
+                if( sourceEntityId != null && targetLocationId != null ) {
+                    if( riverCrossingState.moveEntityToLocation(sourceEntityId, targetLocationId) ) {
+                        doit();
+                    }
+                }
             }
         </script>
     </head>
