@@ -16,13 +16,13 @@
 .world {
     width:400px;
     height:300px;
+    border-spacing:0;
     background-color: #87ceeb;
 }
 
 .slot {
     width:15%;
     height:100%;
-    background-color: red;
     vertical-align: bottom;
     align:center;
 }
@@ -60,9 +60,10 @@
 
 
 #boat {
-    background-color: brown;
+    background-color: pink;
     width:20%;
     height:20%;
+    margin-bottom:-10px;
 }
 
 .entity {
@@ -80,22 +81,19 @@
 }
 
 .bank {
+    width:15%;
+    height:100px;
     background-color: green;
 }
 
 #bank-left-ground {
-    width:15%;
-    height:100px;
 }
 
 #bank-right-ground {
-    width:15%;
-    height:100px;
 }
 
 #river {
     width:70%;
-    height:100px;
     background-color: blue;
 }
 

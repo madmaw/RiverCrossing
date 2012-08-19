@@ -7,3 +7,12 @@ function EntityChicken(id, type) {
     EntityAbstract.apply(this, [id, type]);
 }
 
+EntityChicken.prototype.canEat = function(entity) {
+    var result;
+    if( entity.type == constants.entityTypeGrain && !entity.eaten ) {
+        result = true;
+    } else {
+        result = false;
+    }
+    return result;
+}
